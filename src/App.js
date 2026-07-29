@@ -1,23 +1,32 @@
+import { useRef } from "react";
 import logo from './logo.svg';
 import './App.css';
 
+
 function App() {
+  const fileInputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if(file) {
+      console.log("Selected file:", file);
+      console.log("File name:", file.name);
+      console.log("File Size:", file.size);
+      console.log("File type:", file.type)
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <header className = "App-header">
+          <h1>AI Document Analyzer</h1>
+          ##ADD the rest here tomorrow
+        </header>
     </div>
   );
 }

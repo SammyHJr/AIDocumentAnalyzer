@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.Button {
+  background-color: black;
+  border-color: white;
+  border-radius: 5px;
+  height: 30px;
+  width: 100px;
+  color: white;
+}
