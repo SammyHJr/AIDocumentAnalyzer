@@ -23,17 +23,27 @@ function App() {
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!selectedFile) {
       console.log("No file selected")
       return;
     }
-    console.log("HANDLE UPLOAD")
-    console.log("Selected file:", selectedFile);
-    console.log("File name:", selectedFile.name);
-    console.log("File Size:", selectedFile.size);
-    console.log("File type:", selectedFile.type);
-    console.log("Current time:", new Date().toLocaleTimeString());
+
+    const formData = new FormData();
+    formData.append("file", selectedFile)
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/upload", {
+        method: "POST",
+        body: formData,
+      });
+       const data = await response.json();
+
+       console.log("Upload Successful");
+       console.log(data);
+    } catch (error) {
+      console.error("Upload failed:", error);
+    }
   };
 
 

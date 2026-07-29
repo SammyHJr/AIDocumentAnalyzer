@@ -1,0 +1,8 @@
+*** RUN PYTHON ***
+cd backend
+.\venv\Scripts\Activate
+uvicorn main:app --reload
+
+*** LINKS ***
+http://127.0.0.1:8000
+http://127.0.0.1:8000/docs
