@@ -3,17 +3,19 @@ import './App.css';
 
 
 function App() {
-  const fileInputRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(null);                      /* variable */
+  const [selectedFile, setSelectedFile] = useState(null); /* Array containing 2 elements */
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = (event) => {       /* creates an event object that is later passed  in the function*/
+    const file = event.target.files[0]; /* gives the first selected file */ 
 
     if (file) {
+      setSelectedFile(file);
+      console.log("HANDLEFILE CHANGE")
       console.log("Selected file:", file);
       console.log("File name:", file.name);
       console.log("File Size:", file.size);
@@ -26,11 +28,12 @@ function App() {
       console.log("No file selected")
       return;
     }
+    console.log("HANDLE UPLOAD")
     console.log("Selected file:", selectedFile);
     console.log("File name:", selectedFile.name);
     console.log("File Size:", selectedFile.size);
     console.log("File type:", selectedFile.type);
-
+    console.log("Current time:", new Date().toLocaleTimeString());
   };
 
 
@@ -56,12 +59,7 @@ function App() {
           <div>
             <p>Selected file: {selectedFile.name}</p>
 
-            <button
-              className="Button"
-              onClick={handleUpload}
-            >
-              Upload Document
-            </button>
+            <button className="Button" onClick={handleUpload}> Upload Document </button>
           </div>
         )}
 
