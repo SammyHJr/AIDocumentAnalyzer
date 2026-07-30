@@ -1,10 +1,13 @@
 from fastapi import APIRouter
+from services.ai_services import analyze_resume
 
 router = APIRouter()
 
 @router.post("/analyze")
 async def analyzer(data: dict):
-    return {
-        "resume": data["resume"],
-        "job_description": data["job_description"]
-     }
+    result = analyze_resume (
+        data["resume"],
+        data["job_description"]
+    )
+    
+    return result

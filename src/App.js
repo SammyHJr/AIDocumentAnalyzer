@@ -7,6 +7,7 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null); /* Array containing 2 elements */
   const [pdfText, setPdfText] = useState("");
   const [jobDescription, setJobDescription] = useState("");
+  const [analysis, setAnalysis] = useState(null);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -51,7 +52,37 @@ function App() {
     }
   };
 
+  const handleAnalyze = async () => {
+    if(!pdfText) {
+      alert("Please upload a resume!");
+      return;
+    }
 
+    if(!jobDescription) {
+      alert("Please enter a job description");
+      return;
+    }
+
+    try {
+      const reponse = await fetch("http://127.0.0.1:8000/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          resume: pdfText,
+          job_description: jobDescription
+        }),
+      });
+
+      const data = await reponse.json();
+
+      console.log("Analysis Response:");
+      setAnalysis(data);
+    } catch (error    ) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="App">
@@ -95,8 +126,31 @@ function App() {
             onChange={(e) => setJobDescription(e.target.value)}>
 
             </textarea>
+            <button className="Button" onClick={handleAnalyze}>Analyze Resume</button>
         </div>
 
+        {analysis && (
+            <div>
+              <h2>Analysis</h2>
+              
+              <h3>Match Score</h3>
+              <p>{analysis.match_score}%</p>
+
+              <h3>Matching Skills</h3>
+              <ul>
+                {analysis.missing_skills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
+
+              <h3>Suggestions</h3>
+              <ul>
+                {analysis.suggestions.map((suggestions) =>(
+                  <li key={suggestions}> {suggestions}</li>
+                ))}
+              </ul>
+            </div>
+           )}
 
       </header>
     </div>

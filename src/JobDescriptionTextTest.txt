@@ -1,0 +1,22 @@
+Junior Backend Developer
+
+We are looking for a Junior Backend Developer to join our team.
+
+Requirements
+Python
+FastAPI
+SQL
+Git
+REST APIs
+Nice to Have
+Azure
+Docker
+React
+Responsibilities
+Build backend APIs.
+Work with databases.
+Fix bugs.
+Collaborate with the development team.
+Education
+
+Bachelor's degree in Computer Science, Computer Engineering, or a related field.
