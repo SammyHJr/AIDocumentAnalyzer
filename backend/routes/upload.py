@@ -10,5 +10,6 @@ async def upload(file: UploadFile = File(...)):
 
     return {
         "filename": file.filename,
+        "content_type": file.content_type,
         "text": text
     }

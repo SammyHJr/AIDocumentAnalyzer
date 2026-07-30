@@ -5,6 +5,8 @@ import './App.css';
 function App() {
   const fileInputRef = useRef(null);                      /* variable */
   const [selectedFile, setSelectedFile] = useState(null); /* Array containing 2 elements */
+  const [pdfText, setPdfText] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -41,6 +43,9 @@ function App() {
 
        console.log("Upload Successful");
        console.log(data);
+
+      setPdfText(data.text);
+
     } catch (error) {
       console.error("Upload failed:", error);
     }
@@ -70,8 +75,27 @@ function App() {
             <p>Selected file: {selectedFile.name}</p>
 
             <button className="Button" onClick={handleUpload}> Upload Document </button>
+            {pdfText &&(
+              <div> 
+                <h2>Extracted Text</h2>
+                <pre>{pdfText}</pre>
+              </div>
+          )}
           </div>
+
         )}
+
+        <div className="job-description">
+          <h2>Job Description</h2>
+            <textarea 
+            rows="15" 
+            cols="70" 
+            placeholder="Paste the job description here..."
+            value={jobDescription}
+            onChange={(e) => setJobDescription(e.target.value)}>
+
+            </textarea>
+        </div>
 
 
       </header>
